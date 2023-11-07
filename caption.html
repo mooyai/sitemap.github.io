@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text to Slug</title>
+</head>
+<body>
+    <h1>Text to Slug Converter</h1>
+    <textarea id="inputText" rows="4" cols="50" placeholder="Enter text here"></textarea>
+    <button onclick="convertToSlug()">Convert</button>
+    <button onclick="copyToClipboard()">Copy to Clipboard</button>
+    <p>Result:</p>
+    <p id="outputSlug"></p>
+
+    <script>
+        function convertToSlug() {
+            // Get the text from the textarea
+            const inputText = document.getElementById("inputText").value;
+
+            // Replace characters that are not allowed in filenames with hyphens
+            const slug = inputText
+                .toLowerCase()
+                .replace(/[^\w\s-]/g, '') // Replace characters that are not word characters, spaces, or hyphens
+                .replace(/\s+/g, '-'); // Replace spaces with hyphens
+
+            // Display the result
+            document.getElementById("outputSlug").textContent = slug;
+        }
+
+        function copyToClipboard() {
+            // Get the result text
+            const slug = document.getElementById("outputSlug").textContent;
+
+            // Create a temporary input element to copy the text to the clipboard
+            const tempInput = document.createElement("input");
+            tempInput.value = slug;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+        }
+    </script>
+</body>
+</html>

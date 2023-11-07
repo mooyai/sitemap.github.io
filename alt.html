@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clothing Labels Combiner</title>
+</head>
+<body>
+    <h1>Clothing Labels</h1>
+    <div id="labelContainer">
+        <textarea id="labelInput" placeholder="Enter labels with percentages"></textarea>
+        <button onclick="addLabels()">Add Labels</button>
+        <button onclick="copyToClipboard()">Copy to Clipboard</button>
+    </div>
+    <p id="combinedLabels"></p>
+
+    <script>
+        const labels = [];
+
+        function addLabels() {
+            const labelInput = document.getElementById('labelInput').value;
+            if (labelInput) {
+                const labelPattern = /\s*([a-zA-Z\s-]+)\s\(\d+\.\d+%?\)/g;
+                let match;
+
+                while ((match = labelPattern.exec(labelInput)) !== null) {
+                    labels.push(match[1]);
+                }
+
+                updateCombinedLabels();
+                document.getElementById('labelInput').value = '';
+            }
+        }
+
+        function updateCombinedLabels() {
+            const combinedLabels = labels.join(', ');
+            document.getElementById('combinedLabels').textContent = combinedLabels;
+        }
+
+        function copyToClipboard() {
+            const combinedLabels = labels.join(', ');
+            const textArea = document.createElement('textarea');
+            textArea.value = combinedLabels;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            //alert('Labels copied to clipboard');
+        }
+    </script>
+</body>
+</html>

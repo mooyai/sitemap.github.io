@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        textarea {
+            display: block;
+            width: 400px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Word Generator</h1>
+    <button id="generateHead">Generate Heading</button>
+    <button id="generatePara">Generate Paragraph</button>
+    <textarea id="textgen"></textarea>
+
+    <script>
+
+    var textarea = document.getElementById("textgen");
+
+    textarea.addEventListener("click", function() {
+        textarea.select();
+        document.execCommand("copy");
+    });
+
+        let wordlist = ['การค้า', 'การลงทุน', 'กำไร', 'การบริหาร', 'การจัดการ', 'การตลาด', 'การเงิน', 'การบัญชี', 'การจัดหาแหล่งทุน', 'การวิเคราะห์ธุรกิจ','การเดินทาง', 'การท่องเที่ยว', 'การเข้าพัก', 'ภาคี', 'สถานที่ท่องเที่ยว', 'ที่พัก', 'การเดินทาง', 'การนัดหมาย', 'การจอง', 'การจัดการทริป','เริ่มต้น', 'การสร้างธุรกิจ', 'การเริ่มต้น', 'การเติบโต', 'การพัฒนา', 'การสร้างแบรนด์', 'การตลาด', 'การวางแผน', 'การบริหาร', 'การประกอบธุรกิจ','เทคโนโลยี', 'คอมพิวเตอร์', 'โปรแกรม', 'ไอที', 'เน็ตเวิร์ค', 'สารสนเทศ', 'โซเชียล', 'มือถือ', 'แอป', 'โค้ด', 'คอมเม้นต์', 'อัลกอริทึม', 'ความปลอดภัย', 'วิศวกรรม', 'เครื่องมือ', 'การจัดการ', 'ความรู้', 'นวัตกรรม', 'ปัญญาประดิษฐ์','อาหาร', 'กาแฟ', 'เครื่องดื่ม', 'ของหวาน', 'ปรุงรส', 'เนื้อ', 'ไก่', 'เนื้อหมู', 'ปลา', 'ผัก', 'ผลไม้', 'เครื่องใช้ในครัว', 'อาหารคาว', 'อาหารหวาน', 'อาหารปิ้งย่าง', 'อาหารทะเล', 'อาหารอิตาเลีย', 'อาหารไทย', 'อาหารจีน','เชียงใหม่', 'อาหาร', 'วัฒนธรรม', 'วัด', 'เดินชม', 'ป่า', 'อุทยาน', 'ประวัติศาสตร์', 'ศิลปะ', 'การเดินทาง', 'บันเทิง', 'ออกแบบ', 'ช้อปปิ้ง', 'ตลาด', 'ความงาม', 'การเรียนรู้', 'กิจกรรม', 'นักท่องเที่ยว', 'ชีวิตชุมชน', 'ท่องเที่ยว'];
+
+        function generateText(wordlist, num_paragraphs) {
+            let text = '';
+            for (let i = 0; i < num_paragraphs; i++) {
+                let paragraph = '';
+                let num_sentences = Math.floor(Math.random() * 1) + 5;
+                for (let j = 0; j < num_sentences; j++) {
+                    let num_words = Math.floor(Math.random() * 1) + 5;
+                    for (let k = 0; k < num_words; k++) {
+                        let word = wordlist[Math.floor(Math.random() * wordlist.length)];
+                        paragraph += word + '';
+                    }
+                    // paragraph += '. ';
+                }
+                text += paragraph + '\n\n';
+            }
+            return text;
+        }
+
+        // create the HTML 
+        var generateHead = document.getElementById("generateHead");
+        var generatePara = document.getElementById("generatePara");
+        var textgen = document.getElementById("textgen");
+
+        generateHead.addEventListener("click", function () {
+            let lorem = generateText(wordlist, 1);
+            textgen.value = lorem;
+        });
+
+        generatePara.addEventListener("click", function () {
+            let lorem = generateText(wordlist, 3);
+            textgen.value = lorem;
+        });
+    </script>
+</body>
+
+</html>

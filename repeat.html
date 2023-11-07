@@ -1,0 +1,64 @@
+<html>
+  <body>
+    <textarea id="data"></textarea>
+    <br>
+    <button onclick="findMostCommon()">Find Most Common Numbers</button>
+    <br>
+    <br>
+    <div id="result"></div>
+  </body>
+  <script>
+    function findMostCommon() {
+      // Get the data from the textarea
+      var data = document.getElementById("data").value;
+      var lines = data.split("\n");
+      var counts = {};
+      
+      // Count the occurrences of each number
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i];
+        var digits = line.split("");
+        for (var j = 0; j < digits.length; j++) {
+          var digit = digits[j];
+          if (digit >= '0' && digit <= '9') {
+            if (!counts[digit]) {
+              counts[digit] = 0;
+            }
+            counts[digit]++;
+          }
+        }
+      }
+
+      // Find the most common number
+      var mostCommon = "";
+      var mostCommonCount = 0;
+      for (var num in counts) {
+        if (counts[num] > mostCommonCount) {
+          mostCommon = num;
+          mostCommonCount = counts[num];
+        }
+      }
+      
+      // Get the percentage of the most common number
+      var total = 0;
+      for(var num in counts) {
+        total += counts[num];
+      }
+      var percent = (mostCommonCount / total) * 100;
+      percent = percent.toFixed(2);
+      
+      // Show the results
+      var resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = "Most common number: " + mostCommon + " (" + percent + "%)";
+      
+      //Show all numbers and percentage
+      var resultDiv = document.getElementById("result");
+      resultDiv.innerHTML += "<br>"
+      for (var num in counts) {
+        var percent = (counts[num] / total) * 100;
+        percent = percent.toFixed(2);
+        resultDiv.innerHTML += num + " : " + counts[num] + " (" + percent + "%)<br>";
+      }
+    }
+  </script>
+</html>

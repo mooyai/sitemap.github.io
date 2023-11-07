@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Title Case Converter</title>
+	<style>
+		body {
+			font-family: Helvetica, Arial, sans-serif;
+			padding: 20px;
+		}
+
+		h3 {
+			margin-top: 20px;
+			font-weight: 400;
+			color: #999;
+			font-size: 14px;
+			text-transform: uppercase;
+		}
+
+		label {
+			font-weight: 400;
+			color: #999;
+			font-size: 14px;
+			text-transform: uppercase;
+			padding-bottom: 0;
+			display: block;
+		}
+
+		#result {
+			font-size: 2em;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Title Case Converter</h1>
+	<form>
+		<label for="text">Enter your text:</label><br>
+		<textarea id="text" name="text" rows="10" cols="50"></textarea><br>
+	</form>
+	<h3>Click on text to copy</h2>
+		<div id="result"></div>
+
+		<script>
+			function convertToTitleCase(text) {
+				const words = text.toLowerCase().split(' ');
+				const exceptions = ['a', 'an', 'the', 'and', 'but', 'for', 'nor', 'or', 'so', 'yet', 'at', 'by', 'in', 'of', 'on', 'to', 'up'];
+				const result = words.map(function (word, index) {
+					if (index === 0 || !exceptions.includes(word)) {
+						return word.charAt(0).toUpperCase() + word.slice(1);
+					} else {
+						return word;
+					}
+				}).join(' ');
+				return result;
+			}
+
+			const textInput = document.querySelector('#text');
+			textInput.addEventListener('input', function () {
+				const text = textInput.value;
+				const result = convertToTitleCase(text);
+				resultDiv.textContent = result;
+			});
+
+		</script>
+		<script>
+			const resultDiv = document.querySelector('#result');
+			resultDiv.addEventListener('click', function () {
+				// Copy the text from the result container to the clipboard
+				const text = resultDiv.textContent;
+				navigator.clipboard.writeText(text).then(function () {
+					// Show a confirmation message to the user
+					resultDiv.textContent = 'Copied!';
+					setTimeout(function () {
+						resultDiv.textContent = text;
+					}, 1000);
+				}, function (err) {
+					console.error('Failed to copy text: ', err);
+				});
+			});
+		</script>
+</body>
+
+</html>

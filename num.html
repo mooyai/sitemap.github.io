@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <script>
+        function processNumbers() {
+            let input = document.getElementById("numbers").value;
+            let numbers = input.split(",").map(function (num) {
+                return [parseInt(num.toString()[0]), parseInt(num.toString()[1])];
+            });
+            numbers = [].concat.apply([], numbers);
+            let stats = getStatistics(numbers);
+            let result = "Digit Followed by: <br>";
+            for (let i = 0; i < numbers.length - 1; i++) {
+                let digit = numbers[i];
+                let followedBy = numbers[i + 1];
+                if (!stats.followedBy[digit]) {
+                    stats.followedBy[digit] = {};
+                }
+                if (!stats.followedBy[digit][followedBy]) {
+                    stats.followedBy[digit][followedBy] = 0;
+                }
+                stats.followedBy[digit][followedBy]++;
+            }
+            for (let digit in stats.followedBy) {
+                result += digit + " follow by ";
+                let followedByDigits = stats.followedBy[digit];
+                let sortedFollowedBy = [];
+                for (let followedBy in followedByDigits) {
+                    sortedFollowedBy.push([followedBy, followedByDigits[followedBy]]);
+                }
+                sortedFollowedBy.sort(function (a, b) {
+                    return b[1] - a[1];
+                });
+                for (let i = 0; i < sortedFollowedBy.length; i++) {
+                    result += sortedFollowedBy[i][0] + "(" + sortedFollowedBy[i][1] + ") ";
+                }
+                result += "<br>";
+            }
+            document.getElementById("result").innerHTML = result;
+        }
+
+        function getStatistics(numbers) {
+            let min = Math.min(...numbers);
+            let max = Math.max(...numbers);
+            let avg = numbers.reduce(function (sum, num) {
+                return sum + num;
+            }, 0) / numbers.length;
+            let frequency = {};
+            for (let num of numbers) {
+                if (!frequency[num]) {
+                    frequency[num] = 0;
+                }
+                frequency[num]++;
+            }
+            let followedBy = {};
+            return { min, max, avg, frequency, followedBy };
+        }
+
+    </script>
+</head>
+
+<body>
+    <div>
+        <label for="numbers">Enter numbers:</label>
+        <input type="text" id="numbers">
+    </div>
+    <div>
+        <button onclick="processNumbers()">Process</button>
+    </div>
+    <div id="result"></div>
+</body>
+
+</html>

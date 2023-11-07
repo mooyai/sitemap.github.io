@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C H A R</title>
+    <script>
+        function letterValue() {
+            var str = document.getElementById('alltext').value;
+            // ก = ด = ท = ถ = ภ = ฤ = ่ = ุ = า = ำ = 1;
+            // ข = ช = ง = บ = ป = ู = เ = แ = ้ = 2;
+            // ฆ = ต = ฑ = ฒ = ๋ = 3;
+            // ค = ธ = ญ = ร = ษ = โ = ะ = ั = ิ = 4;
+            // ฉ = ณ = ฌ = น = ม = ห = ฎ = ฬ = ฮ = ึ = 5;
+            // จ = ล = ว = อ = ใ = 6;
+            // ซ = ศ = ส = ๊ = ี = ื = 7;
+            // ผ = ฝ = พ = ฟ = ย = ็ = 8;
+            // ฏ = ฐ = ไ = ์ = 9;
+
+            ก = ด = ท = ถ = ภ = ฤ = 1;
+            ข = ช = ง = บ = ป = 2;
+            ฆ = ต = ฑ = ฒ = 3;
+            ค = ธ = ญ = ร = ษ = 4;
+            ฉ = ณ = ฌ = น = ม = ห = ฎ = ฬ = ฮ = 5;
+            จ = ล = ว = อ = 6;
+            ซ = ศ = ส = 7;
+            ผ = ฝ = พ = ฟ = ย = 8;
+            ฏ = ฐ = 9;
+
+            A = I = J = Q = Y = 1;
+            B = K = R = 2;
+            C = G = L = S = 3;
+            D = M = T = 4;
+            E = H = N = X = 5;
+            U = V = W = 6;
+            O = Z = 7;
+            F = P = 8;
+
+
+
+            var text = str.toUpperCase();
+            var letters = text.split("")
+
+            // alert(letters.reduce(function (prev, curr) {
+            //     return prev + window[curr];
+            // }, 0));
+            var n = letters.reduce(function (prev, curr) {
+                return prev += window[curr];
+            }, 0);
+
+            var value = n,
+                sum = 0;
+
+            while (value) {
+                sum += value % 10;
+                value = Math.floor(value / 10);
+            }
+
+            document.getElementById("demo1").innerHTML = "ตัวเลขที่คุณได้ " + n;
+
+            if (sum != n) {
+                document.getElementById("demo1").innerHTML = "ตัวเลขที่คุณได้ " + n + " | " + sum;
+            }
+
+
+            switch (n) {
+                case 1:
+                    text = "1 : ผู้นำ | เจ้านายตัวเอง, ผู้บริหาร, ผู้นํา, เจ้าของธุรกิจ, ผู้ชนะ ";
+                    break;
+                case 2:
+                    text = "2 : รับรู้ความรู้สึกได้ดี | ฮีลเลอร์, ผู้สนับสนุน";
+                    break;
+                case 3:
+                    text =
+                        "3 : ไอเดียสร้างสรรค์ สนุกสนาน | งานสร้างแรงบันดาลใจ, นักเขียน, นักแสดง, งาน, สื่อสาร, งานศิลปะ";
+                    break;
+                case 4:
+                    text =
+                        "4 : วินัย, มีเหตุผล | นักแก้ปัญหา, นักวิเคราะห์, นักวิชาการ, ทหาร, ตํารวจ, ครู อาจารย์, นักบวช";
+                    break;
+                case 5:
+                    text =
+                        "5 : การปรับตัว, การแก้สถานการณ์ | ผู้ประสานงาน, นักสังคม, สงเคราะห์, นักขาย, นักการตลาด, นักจิตวิทยา";
+                    break;
+                case 6:
+                    text =
+                        "6 : รับผิดชอบต่อสังคม | นักบําบัด, ทนายความ, ผู้พิพากษา, งานแก้ปัญหา, สังคม, นักเดินทาง, นักผลิต";
+                    break;
+                case 7:
+                    text =
+                        "7 : แหล่งความรู้ ข้อมูล | นักคิด, ศาสตราจารย์, ผู้เชี่ยวชาญ, นักวิเคราะห์ขั้น สูง, งานเฉพาะทาง, หมอ, นักเคมี, นักบัญชี, งานแผน, ไอที, เทคโนโลยี, กูรูในด้าน ต่างๆ (ทุกงาน)";
+                    break;
+                case 8:
+                    text =
+                        "8 : มีพลัง, โด่งดัง | งานในที่สาธารณะ เป็นที่รู้จัก มีชื่อเสียง, งานที่อยู่ในสื่อ งานที่เป็นจุดสนใจ";
+                    break;
+                case 9:
+                    text =
+                        "9 : ใจดี ผู้ให้ | งานช่วยเหลือสังคม, มูลนิธิ งานช่วยเหลือผู้คน, ลูกค้า สัมพันธ์, ทรัพยากรบุคคล, กู้ภัย, Light Worker";
+                    break;
+                case 11:
+                    text = "11 : ที่สุดของเซนส์ | งานเกี่ยวกับพลังจิต, จิตใต้ สํานึก, สิ่งศักดิ์สิทธิ์, จักรวาล";
+                    break;
+                case 19:
+                    text = "19 : Happiness/ Community / ความสุข  / ชุมชน";
+                    break;
+                case 22:
+                    text = "22 : ที่สุดของผู้สร้าง | งานเกี่ยวกับชุมชน สังคม ใน วงกว้าง ระดับประเทศ/โลก";
+                    break;
+                case 24:
+                    text = "24 : Success/ Completion / ความสำเร็จ";
+                    break;
+                case 26:
+                    text = "26 : การค้าขาย";
+                    break;
+                case 32:
+                    text = "32 : Charming/ Popular / มีเสน่ห์ / เป็นที่นิยม";
+                    break;
+                case 36:
+                    text = "36 : Harmony/ Love / ความสามัคคี / ความรัก";
+                    break;
+                case 40:
+                    text = "40 : Traveling/ Adventure / การเดินทาง / ผจญภัย";
+                    break;
+                case 41:
+                    text = "41 : Aboard / ต่างประเทศ";
+                    break;
+                case 42:
+                    text = "42 : Supported / ช่วยเหลือ";
+                    break;
+                case 44:
+                    text = "44 : Speaker/ Influencer / เป็นผู้พูด / ผู้มีอิทธิพล ";
+                    break;
+                case 45:
+                    text = "45 : Luck / Prosperity / โชคลาภ / ความเจริญรุ่งเรือง";
+                    break;
+                case 51:
+                    text = "51 : Supported/ Popular / ช่วยเหลือ / เป็นที่นิยม";
+                    break;
+                case 54:
+                    text = "54 : Outstanding Star  / ดาวเด่น";
+                    break;
+                case 55:
+                    text = "55 : Growth / Abundance  / การเติบโต / ความอุดมสมบูรณ์";
+                    break;
+                case 59:
+                    text = "59 : Great Life / ชีวิตที่ยิ่งใหญ่";
+                    break;
+                case 63:
+                    text = "63 : Love/ Partner / ความรัก / คู่หู";
+                    break;
+                case 65:
+                    text = "65 : Billionaire / CEO / มหาเศรษฐี ";
+                    break;
+                case 90:
+                    text = "90 : Divine Protection / การปกป้องจากสวรรค์";
+                    break;
+                case 91:
+                    text = "91 : Happiness / Community / ความสุข  / ชุมชน";
+                    break;
+                case 95:
+                    text = "95 : Great Life  / ชีวิตที่ยิ่งใหญ่";
+                    break;
+                case 100:
+                    text = "100 : The Best / ดีที่สุด";
+                default:
+                    text = "คุณยังต้องแก้ไข";
+            }
+
+            
+            document.getElementById("demo2").innerHTML = text;
+
+            if (sum != n) {
+
+                switch (sum) {
+                    case 1:
+                        text = "1 : ผู้นำ | เจ้านายตัวเอง, ผู้บริหาร, ผู้นํา, เจ้าของธุรกิจ, ผู้ชนะ ";
+                        break;
+                    case 2:
+                        text = "2 : รับรู้ความรู้สึกได้ดี | ฮีลเลอร์, ผู้สนับสนุน";
+                        break;
+                    case 3:
+                        text =
+                            "3 : ไอเดียสร้างสรรค์ สนุกสนาน | งานสร้างแรงบันดาลใจ, นักเขียน, นักแสดง, งาน, สื่อสาร, งานศิลปะ";
+                        break;
+                    case 4:
+                        text =
+                            "4 : วินัย, มีเหตุผล | นักแก้ปัญหา, นักวิเคราะห์, นักวิชาการ, ทหาร, ตํารวจ, ครู อาจารย์, นักบวช";
+                        break;
+                    case 5:
+                        text =
+                            "5 : การปรับตัว, การแก้สถานการณ์ | ผู้ประสานงาน, นักสังคม, สงเคราะห์, นักขาย, นักการตลาด, นักจิตวิทยา";
+                        break;
+                    case 6:
+                        text =
+                            "6 : รับผิดชอบต่อสังคม | นักบําบัด, ทนายความ, ผู้พิพากษา, งานแก้ปัญหา, สังคม, นักเดินทาง, นักผลิต";
+                        break;
+                    case 7:
+                        text =
+                            "7 : แหล่งความรู้ ข้อมูล | นักคิด, ศาสตราจารย์, ผู้เชี่ยวชาญ, นักวิเคราะห์ขั้น สูง, งานเฉพาะทาง, หมอ, นักเคมี, นักบัญชี, งานแผน, ไอที, เทคโนโลยี, กูรูในด้าน ต่างๆ (ทุกงาน)";
+                        break;
+                    case 8:
+                        text =
+                            "8 : มีพลัง, โด่งดัง | งานในที่สาธารณะ เป็นที่รู้จัก มีชื่อเสียง, งานที่อยู่ในสื่อ งานที่เป็นจุดสนใจ";
+                        break;
+                    case 9:
+                        text =
+                            "9 : ใจดี ผู้ให้ | งานช่วยเหลือสังคม, มูลนิธิ งานช่วยเหลือผู้คน, ลูกค้า สัมพันธ์, ทรัพยากรบุคคล, กู้ภัย, Light Worker";
+                        break;
+                    case 11:
+                        text = "11 : ที่สุดของเซนส์ | งานเกี่ยวกับพลังจิต, จิตใต้ สํานึก, สิ่งศักดิ์สิทธิ์, จักรวาล";
+                        break;
+                    case 19:
+                        text = "19 : Happiness/ Community / ความสุข  / ชุมชน";
+                        break;
+                    case 22:
+                        text = "22 : ที่สุดของผู้สร้าง | งานเกี่ยวกับชุมชน สังคม ใน วงกว้าง ระดับประเทศ/โลก";
+                        break;
+                    case 24:
+                        text = "24 : Success/ Completion / ความสำเร็จ";
+                        break;
+                    case 26:
+                        text = "26 : การค้าขาย";
+                        break;
+                    case 32:
+                        text = "32 : Charming/ Popular / มีเสน่ห์ / เป็นที่นิยม";
+                        break;
+                    case 36:
+                        text = "36 : Harmony/ Love / ความสามัคคี / ความรัก";
+                        break;
+                    case 40:
+                        text = "40 : Traveling/ Adventure / การเดินทาง / ผจญภัย";
+                        break;
+                    case 41:
+                        text = "41 : Aboard / ต่างประเทศ";
+                        break;
+                    case 42:
+                        text = "42 : Supported / ช่วยเหลือ";
+                        break;
+                    case 44:
+                        text = "44 : Speaker/ Influencer / เป็นผู้พูด / ผู้มีอิทธิพล ";
+                        break;
+                    case 45:
+                        text = "45 : Luck / Prosperity / โชคลาภ / ความเจริญรุ่งเรือง";
+                        break;
+                    case 51:
+                        text = "51 : Supported/ Popular / ช่วยเหลือ / เป็นที่นิยม";
+                        break;
+                    case 54:
+                        text = "54 : Outstanding Star  / ดาวเด่น";
+                        break;
+                    case 55:
+                        text = "55 : Growth / Abundance  / การเติบโต / ความอุดมสมบูรณ์";
+                        break;
+                    case 59:
+                        text = "59 : Great Life / ชีวิตที่ยิ่งใหญ่";
+                        break;
+                    case 63:
+                        text = "63 : Love/ Partner / ความรัก / คู่หู";
+                        break;
+                    case 65:
+                        text = "65 : Billionaire / CEO / มหาเศรษฐี ";
+                        break;
+                    case 90:
+                        text = "90 : Divine Protection / การปกป้องจากสวรรค์";
+                        break;
+                    case 91:
+                        text = "91 : Happiness / Community / ความสุข  / ชุมชน";
+                        break;
+                    case 95:
+                        text = "95 : Great Life  / ชีวิตที่ยิ่งใหญ่";
+                        break;
+                    case 100:
+                        text = "100 : The Best / ดีที่สุด";
+                    default:
+                        text = "คุณยังต้องแก้ไข";
+                }
+
+
+                document.getElementById("demo3").innerHTML = text;
+
+            }
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="demo1"></div>
+    <div id="demo2"></div>
+    <div id="demo3"></div>
+    <form>
+        <input type="text" id="alltext" name="alltext">
+        <input class="button" name="submit" type="submit" value="submit" onclick="letterValue(); return false;" />
+    </form>
+    <p>
+        A = I = J = Q = Y = 1;
+        <br>B = K = R = 2;
+        <br>C = G = L = S = 3;
+        <br>D = M = T = 4;
+        <br>E = H = N = X = 5;
+        <br>U = V = W = 6;
+        <br>O = Z = 7;
+        <br>F = P = 8;
+        <br>ก = ด = ท = ถ = ภ = ฤ = ่ = ุ = า = ำ = 1;
+        <br>ข = ช = ง = บ = ป = ู = เ = แ = ้ = 2;
+        <br>ฆ = ต = ฑ = ฒ = ๋ = 3;
+        <br>ค = ธ = ญ = ร = ษ = โ = ะ = ั = ิ = 4;
+        <br>ฉ = ณ = ฌ = น = ม = ห = ฎ = ฬ = ฮ = ึ = 5;
+        <br>จ = ล = ว = อ = ใ = 6;
+        <br>ซ = ศ = ส = ๊ = ี = ื = 7;
+        <br>ผ = ฝ = พ = ฟ = ย = ็ = 8;
+        <br>ฏ = ฐ = ไ = ์ = 9;
+        <br>1 = ผู้นำ | เจ้านายตัวเอง, ผู้บริหาร, ผู้นํา, เจ้าของธุรกิจ, ผู้ชนะ
+        <br>2 = รับรู้ความรู้สึกได้ดี | ฮีลเลอร์, ผู้สนับสนุน
+        <br>3 = ไอเดียสร้างสรรค์ สนุกสนาน | งานสร้างแรงบันดาลใจ, นักเขียน, นักแสดง, งาน, สื่อสาร, งานศิลปะ
+        <br>4 = วินัย, มีเหตุผล | นักแก้ปัญหา, นักวิเคราะห์, นักวิชาการ, ทหาร, ตํารวจ, ครู อาจารย์, นักบวช
+        <br>5 = การปรับตัว, การแก้สถานการณ์ | ผู้ประสานงาน, นักสังคม, สงเคราะห์, นักขาย, นักการตลาด, นักจิตวิทยา
+        <br>6 = รับผิดชอบต่อสังคม | นักบําบัด, ทนายความ, ผู้พิพากษา, งานแก้ปัญหา, สังคม, นักเดินทาง, นักผลิต
+        <br>7 = แหล่งความรู้ ข้อมูล | นักคิด, ศาสตราจารย์, ผู้เชี่ยวชาญ, นักวิเคราะห์ขั้น สูง, งานเฉพาะทาง, หมอ,
+        นักเคมี, นักบัญชี, งานแผน, ไอที, เทคโนโลยี, กูรูในด้าน ต่างๆ (ทุกงาน)
+        <br>8 = มีพลัง, โด่งดัง | งานในที่สาธารณะ เป็นที่รู้จัก มีชื่อเสียง, งานที่อยู่ในสื่อ งานที่เป็นจุดสนใจ
+        <br>9 = ใจดี ผู้ให้ | งานช่วยเหลือสังคม, มูลนิธิ งานช่วยเหลือผู้คน, ลูกค้า สัมพันธ์, ทรัพยากรบุคคล, กู้ภัย,
+        Light Worker
+        <br>11 = ที่สุดของเซนส์ | งานเกี่ยวกับพลังจิต, จิตใต้ สํานึก, สิ่งศักดิ์สิทธิ์, จักรวาล
+        <br>19 = Happiness/ Community / ความสุข / ชุมชน
+        <br>22 = ที่สุดของผู้สร้าง | งานเกี่ยวกับชุมชน สังคม ใน วงกว้าง ระดับประเทศ/โลก
+        <br>24 = Success/ Completion / ความสำเร็จ
+        <br>26 = การค้าขาย
+        <br>32 = Charming/ Popular / มีเสน่ห์ / เป็นที่นิยม
+        <br>36 = Harmony/ Love / ความสามัคคี / ความรัก
+        <br>40 = Traveling/ Adventure / การเดินทาง / ผจญภัย
+        <br>41 = Aboard / ต่างประเทศ
+        <br>42 = Supported / ช่วยเหลือ
+        <br>44 = Speaker/ Influencer / เป็นผู้พูด / ผู้มีอิทธิพล
+        <br>45 = Luck / Prosperity / โชคลาภ / ความเจริญรุ่งเรือง
+        <br>51 = Supported/ Popular / ช่วยเหลือ / เป็นที่นิยม
+        <br>54 = Outstanding Star / ดาวเด่น
+        <br>55 = Growth / Abundance / การเติบโต / ความอุดมสมบูรณ์
+        <br>59 = Great Life / ชีวิตที่ยิ่งใหญ่
+        <br>63 = Love/ Partner / ความรัก / คู่หู
+        <br>65 = Billionaire / CEO / มหาเศรษฐี
+        <br>90 = Divine Protection / การปกป้องจากสวรรค์
+        <br>91 = Happiness / Community / ความสุข / ชุมชน
+        <br>95 = Great Life / ชีวิตที่ยิ่งใหญ่
+        <br>100 = The Best / ดีที่สุด
+    </p>
+</body>
+
+</html>

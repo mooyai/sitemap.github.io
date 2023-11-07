@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Value Calculator</title>
+    <style>
+        * {
+            font-family: Helvetica, Arial, sans-serif !important;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <label>ใส่คำลงไป:</label>
+        <input type="text" id="wordInput">
+        <button type="button" onclick="calculateCharacterValues()">Calculate</button>
+    </form>
+    <p id="result"></p>
+    <p>
+        A = I = J = Q = Y = 1;
+        <br>B = K = R = 2;
+        <br>C = G = L = S = 3;
+        <br>D = M = T = 4;
+        <br>E = H = N = X = 5;
+        <br>U = V = W = 6;
+        <br>O = Z = 7;
+        <br>F = P = 8;
+        <br>ก = ด = ท = ถ = ภ = ฤ = ่ = ุ = า = ำ = 1;
+        <br>ข = ช = ง = บ = ป = ู = เ = แ = ้ = 2;
+        <br>ฆ = ต = ฑ = ฒ = ๋ = 3;
+        <br>ค = ธ = ญ = ร = ษ = โ = ะ = ั = ิ = 4;
+        <br>ฉ = ณ = ฌ = น = ม = ห = ฎ = ฬ = ฮ = ึ = 5;
+        <br>จ = ล = ว = อ = ใ = 6;
+        <br>ซ = ศ = ส = ๊ = ี = ื = 7;
+        <br>ผ = ฝ = พ = ฟ = ย = ็ = 8;
+        <br>ฏ = ฐ = ไ = ์ = 9;
+        <br><br><strong>เลขและอักษรกาลกิณีที่ควรเลี่ยง</strong>
+        <br>เกิดวันอาทิตย์ เลข 6 อักษร ( ศ ษ ส ห ฬ ฮ )
+        <br>เกิดวันจันทร์ เลข 1 อักษร ( อ )
+        <br>เกิดวันอังคาร เลข 2 อักษร ( ก ข ค ฆ ง )
+        <br>เกิดวันพุธกลางวัน เลข 3 อักษร ( จ ฉ ช ซ ฌ ญ )
+        <br>เกิดวัน พุธกลางคืน เลข 5 อักษร ( บ ป ผ ฝ พ ฟ ภ ม )
+        <br>เกิดวันพฤหัส เลข 7 อักษร ( ด ต ถ ท ธ น )
+        <br>เกิดวันศุกร์ เลข 8 อักษร ( ย ร ล ว )
+        <br>เกิดวันเสาร์ เลข 4 อักษร ( ฎ ฏ ฐ ฑ ฒ ณ )
+        <br><br>1 = ผู้นำ | เจ้านายตัวเอง, ผู้บริหาร, ผู้นํา, เจ้าของธุรกิจ, ผู้ชนะ
+        <br>2 = รับรู้ความรู้สึกได้ดี | ฮีลเลอร์, ผู้สนับสนุน
+        <br>3 = ไอเดียสร้างสรรค์ สนุกสนาน | งานสร้างแรงบันดาลใจ, นักเขียน, นักแสดง, งาน, สื่อสาร, งานศิลปะ
+        <br>4 = วินัย, มีเหตุผล | นักแก้ปัญหา, นักวิเคราะห์, นักวิชาการ, ทหาร, ตํารวจ, ครู อาจารย์, นักบวช
+        <br>5 = การปรับตัว, การแก้สถานการณ์ | ผู้ประสานงาน, นักสังคม, สงเคราะห์, นักขาย, นักการตลาด, นักจิตวิทยา
+        <br>6 = รับผิดชอบต่อสังคม | นักบําบัด, ทนายความ, ผู้พิพากษา, งานแก้ปัญหา, สังคม, นักเดินทาง, นักผลิต
+        <br>7 = แหล่งความรู้ ข้อมูล | นักคิด, ศาสตราจารย์, ผู้เชี่ยวชาญ, นักวิเคราะห์ขั้น สูง, งานเฉพาะทาง, หมอ,
+        นักเคมี, นักบัญชี, งานแผน, ไอที, เทคโนโลยี, กูรูในด้าน ต่างๆ (ทุกงาน)
+        <br>8 = มีพลัง, โด่งดัง | งานในที่สาธารณะ เป็นที่รู้จัก มีชื่อเสียง, งานที่อยู่ในสื่อ งานที่เป็นจุดสนใจ
+        <br>9 = ใจดี ผู้ให้ | งานช่วยเหลือสังคม, มูลนิธิ งานช่วยเหลือผู้คน, ลูกค้า สัมพันธ์, ทรัพยากรบุคคล, กู้ภัย,
+        Light Worker
+        <br>11 = ที่สุดของเซนส์ | งานเกี่ยวกับพลังจิต, จิตใต้ สํานึก, สิ่งศักดิ์สิทธิ์, จักรวาล
+        <br>19 = Happiness/ Community / ความสุข / ชุมชน
+        <br>22 = ที่สุดของผู้สร้าง | งานเกี่ยวกับชุมชน สังคม ใน วงกว้าง ระดับประเทศ/โลก
+        <br>24 = Success/ Completion / ความสำเร็จ
+        <br>26 = การค้าขาย
+        <br>32 = Charming/ Popular / มีเสน่ห์ / เป็นที่นิยม
+        <br>36 = Harmony/ Love / ความสามัคคี / ความรัก
+        <br>40 = Traveling/ Adventure / การเดินทาง / ผจญภัย
+        <br>41 = Aboard / ต่างประเทศ
+        <br>42 = Supported / ช่วยเหลือ
+        <br>44 = Speaker/ Influencer / เป็นผู้พูด / ผู้มีอิทธิพล
+        <br>45 = Luck / Prosperity / โชคลาภ / ความเจริญรุ่งเรือง
+        <br>51 = Supported/ Popular / ช่วยเหลือ / เป็นที่นิยม
+        <br>54 = Outstanding Star / ดาวเด่น
+        <br>55 = Growth / Abundance / การเติบโต / ความอุดมสมบูรณ์
+        <br>59 = Great Life / ชีวิตที่ยิ่งใหญ่
+        <br>63 = Love/ Partner / ความรัก / คู่หู
+        <br>65 = Billionaire / CEO / มหาเศรษฐี
+        <br>90 = Divine Protection / การปกป้องจากสวรรค์
+        <br>91 = Happiness / Community / ความสุข / ชุมชน
+        <br>95 = Great Life / ชีวิตที่ยิ่งใหญ่
+        <br>100 = The Best / ดีที่สุด
+    </p>
+    <script>
+        // Get input element
+        var input = document.getElementById("wordInput");
+
+        // Add event listener to input element to listen for input event
+        input.addEventListener("input", function () {
+            // Call the calculate function
+            calculateCharacterValues();
+        });
+
+
+        function calculateCharacterValues() {
+            var inputWord = document.getElementById("wordInput").value;
+            var word = input.value.toUpperCase();
+
+            var result = 0;
+            for (var i = 0; i < word.length; i++) {
+                var char = word.charAt(i);
+                if (char === "A" || char === "I" || char === "J" || char === "Q" || char === "Y" || char === "1") {
+                    result += 1;
+                } else if (char === "B" || char === "K" || char === "R" || char === "2") {
+                    result += 2;
+                } else if (char === "C" || char === "G" || char === "L" || char === "S" || char === "3") {
+                    result += 3;
+                } else if (char === "D" || char === "M" || char === "T" || char === "4") {
+                    result += 4;
+                } else if (char === "E" || char === "H" || char === "N" || char === "X" || char === "5") {
+                    result += 5;
+                } else if (char === "U" || char === "V" || char === "W" || char === "6") {
+                    result += 6;
+                } else if (char === "O" || char === "Z" || char === "7") {
+                    result += 7;
+                } else if (char === "F" || char === "P" || char === "8") {
+                    result += 8;
+                } else if (char === "ก" || char === "ด" || char === "ท" || char === "ถ" || char === "ภ" || char === "ฤ" || char === "่" || char === "ุ" || char === "า" || char === "ำ") {
+                    result += 1;
+                } else if (char === "ข" || char === "ช" || char === "ง" || char === "บ" || char === "ป" || char === "ู" || char === "เ" || char === "แ" || char === "้") {
+                    result += 2;
+                } else if (char === "ฆ" || char === "ต" || char === "ฑ" || char === "ฒ" || char === "๋") {
+                    result += 3;
+                } else if (char === "ค" || char === "ธ" || char === "ญ" || char === "ร" || char === "ษ" || char === "โ" || char === "ะ" || char === "ั" || char === "ิ") {
+                    result += 4;
+                } else if (char === "ฉ" || char === "ณ" || char === "ฌ" || char === "น" || char === "ม" || char === "ห" || char === "ฎ" || char === "ฬ" || char === "ฮ" || char === "ึ") {
+                    result += 5;
+                } else if (char === "จ" || char === "ล" || char === "ว" || char === "อ" || char === "ใ") {
+                    result += 6;
+                } else if (char === "ซ" || char === "ศ" || char === "ส" || char === "๊" || char === "ี" || char === "ื") {
+                    result += 7;
+                } else if (char === "ผ" || char === "ฝ" || char === "พ" || char === "ฟ" || char === "ย" || char === "็") {
+                    result += 8;
+                } else if (char === "ฏ" || char === "ฐ" || char === "ไ" || char === "์" || char === "9") {
+                    result += 9;
+                }
+            }
+
+            var finalResult = 0;
+            var temp = result;
+            while (temp > 0) {
+                finalResult += temp % 10;
+                temp = Math.floor(temp / 10);
+            }
+
+            var finaltext;
+            var finaltext2;
+            if (result === 1) {
+                finaltext = "ผู้นำ | เจ้านายตัวเอง, ผู้บริหาร, ผู้นํา, เจ้าของธุรกิจ, ผู้ชนะ";
+            } else if (result === 2) {
+                finaltext = "รับรู้ความรู้สึกได้ดี | ฮีลเลอร์, ผู้สนับสนุน";
+            } else if (result === 3) {
+                finaltext = "ไอเดียสร้างสรรค์ สนุกสนาน | งานสร้างแรงบันดาลใจ, นักเขียน, นักแสดง, งาน, สื่อสาร, งานศิลปะ";
+            } else if (result === 4) {
+                finaltext = "วินัย, มีเหตุผล | นักแก้ปัญหา, นักวิเคราะห์, นักวิชาการ, ทหาร, ตํารวจ, ครู อาจารย์, นักบวช";
+            } else if (result === 5) {
+                finaltext = "การปรับตัว, การแก้สถานการณ์ | ผู้ประสานงาน, นักสังคม, สงเคราะห์, นักขาย, นักการตลาด, นักจิตวิทยา";
+            } else if (result === 6) {
+                finaltext = "รับผิดชอบต่อสังคม | นักบําบัด, ทนายความ, ผู้พิพากษา, งานแก้ปัญหา, สังคม, นักเดินทาง, นักผลิต";
+            } else if (result === 7) {
+                finaltext = "แหล่งความรู้ ข้อมูล | นักคิด, ศาสตราจารย์, ผู้เชี่ยวชาญ, นักวิเคราะห์ขั้น สูง, งานเฉพาะทาง, หมอ, นักเคมี, นักบัญชี, งานแผน, ไอที, เทคโนโลยี, กูรูในด้าน ต่างๆ (ทุกงาน)";
+            } else if (result === 8) {
+                finaltext = "มีพลัง, โด่งดัง | งานในที่สาธารณะ เป็นที่รู้จัก มีชื่อเสียง, งานที่อยู่ในสื่อ งานที่เป็นจุดสนใจ";
+            } else if (result === 9) {
+                finaltext = "ใจดี ผู้ให้ | งานช่วยเหลือสังคม, มูลนิธิ งานช่วยเหลือผู้คน, ลูกค้า สัมพันธ์, ทรัพยากรบุคคล, กู้ภัย, Light Worker";
+            } else if (result === 11) {
+                finaltext = "ที่สุดของเซนส์ | งานเกี่ยวกับพลังจิต, จิตใต้ สํานึก, สิ่งศักดิ์สิทธิ์, จักรวาล";
+            } else if (result === 19) {
+                finaltext = "Happiness/ Community / ความสุข / ชุมชน";
+            } else if (result === 22) {
+                finaltext = "ที่สุดของผู้สร้าง | งานเกี่ยวกับชุมชน สังคม ใน วงกว้าง ระดับประเทศ/โลก";
+            } else if (result === 24) {
+                finaltext = "Success/ Completion / ความสำเร็จ";
+            } else if (result === 26) {
+                finaltext = "การค้าขาย";
+            } else if (result === 32) {
+                finaltext = "Charming/ Popular / มีเสน่ห์ / เป็นที่นิยม";
+            } else if (result === 36) {
+                finaltext = "Harmony/ Love / ความสามัคคี / ความรัก";
+            } else if (result === 40) {
+                finaltext = "Traveling/ Adventure / การเดินทาง / ผจญภัย";
+            } else if (result === 41) {
+                finaltext = "Aboard / ต่างประเทศ";
+            } else if (result === 42) {
+                finaltext = "Supported / ช่วยเหลือ";
+            } else if (result === 44) {
+                finaltext = "Speaker/ Influencer / เป็นผู้พูด / ผู้มีอิทธิพล";
+            } else if (result === 45) {
+                finaltext = "Luck / Prosperity / โชคลาภ / ความเจริญรุ่งเรือง";
+            } else if (result === 51) {
+                finaltext = "Supported/ Popular / ช่วยเหลือ / เป็นที่นิยม";
+            } else if (result === 54) {
+                finaltext = "Outstanding Star / ดาวเด่น";
+            } else if (result === 55) {
+                finaltext = "Growth / Abundance / การเติบโต / ความอุดมสมบูรณ์";
+            } else if (result === 59) {
+                finaltext = "Great Life / ชีวิตที่ยิ่งใหญ่";
+            } else if (result === 63) {
+                finaltext = "Love/ Partner / ความรัก / คู่หู";
+            } else if (result === 65) {
+                finaltext = "Billionaire / CEO / มหาเศรษฐี";
+            } else if (result === 90) {
+                finaltext = "Divine Protection / การปกป้องจากสวรรค์";
+            } else if (result === 91) {
+                finaltext = "Happiness / Community / ความสุข / ชุมชน";
+            } else if (result === 95) {
+                finaltext = "Great Life / ชีวิตที่ยิ่งใหญ่";
+            } else if (result === 100) {
+                finaltext = "The Best / ดีที่สุด";
+            } else {
+                finaltext = "ยังไม่ตรงกับข้อไหน";
+            }
+
+            if (finalResult === 1) {
+                finaltext2 = "ผู้นำ | เจ้านายตัวเอง, ผู้บริหาร, ผู้นํา, เจ้าของธุรกิจ, ผู้ชนะ";
+            } else if (finalResult === 2) {
+                finaltext2 = "รับรู้ความรู้สึกได้ดี | ฮีลเลอร์, ผู้สนับสนุน";
+            } else if (finalResult === 3) {
+                finaltext2 = "ไอเดียสร้างสรรค์ สนุกสนาน | งานสร้างแรงบันดาลใจ, นักเขียน, นักแสดง, งาน, สื่อสาร, งานศิลปะ";
+            } else if (finalResult === 4) {
+                finaltext2 = "วินัย, มีเหตุผล | นักแก้ปัญหา, นักวิเคราะห์, นักวิชาการ, ทหาร, ตํารวจ, ครู อาจารย์, นักบวช";
+            } else if (finalResult === 5) {
+                finaltext2 = "การปรับตัว, การแก้สถานการณ์ | ผู้ประสานงาน, นักสังคม, สงเคราะห์, นักขาย, นักการตลาด, นักจิตวิทยา";
+            } else if (finalResult === 6) {
+                finaltext2 = "รับผิดชอบต่อสังคม | นักบําบัด, ทนายความ, ผู้พิพากษา, งานแก้ปัญหา, สังคม, นักเดินทาง, นักผลิต";
+            } else if (finalResult === 7) {
+                finaltext2 = "แหล่งความรู้ ข้อมูล | นักคิด, ศาสตราจารย์, ผู้เชี่ยวชาญ, นักวิเคราะห์ขั้น สูง, งานเฉพาะทาง, หมอ, นักเคมี, นักบัญชี, งานแผน, ไอที, เทคโนโลยี, กูรูในด้าน ต่างๆ (ทุกงาน)";
+            } else if (finalResult === 8) {
+                finaltext2 = "มีพลัง, โด่งดัง | งานในที่สาธารณะ เป็นที่รู้จัก มีชื่อเสียง, งานที่อยู่ในสื่อ งานที่เป็นจุดสนใจ";
+            } else if (finalResult === 9) {
+                finaltext2 = "ใจดี ผู้ให้ | งานช่วยเหลือสังคม, มูลนิธิ งานช่วยเหลือผู้คน, ลูกค้า สัมพันธ์, ทรัพยากรบุคคล, กู้ภัย, Light Worker";
+            } else if (finalResult === 11) {
+                finaltext2 = "ที่สุดของเซนส์ | งานเกี่ยวกับพลังจิต, จิตใต้ สํานึก, สิ่งศักดิ์สิทธิ์, จักรวาล";
+            } else if (finalResult === 19) {
+                finaltext2 = "Happiness/ Community / ความสุข / ชุมชน";
+            } else if (finalResult === 22) {
+                finaltext2 = "ที่สุดของผู้สร้าง | งานเกี่ยวกับชุมชน สังคม ใน วงกว้าง ระดับประเทศ/โลก";
+            } else if (finalResult === 24) {
+                finaltext2 = "Success/ Completion / ความสำเร็จ";
+            } else if (finalResult === 26) {
+                finaltext2 = "การค้าขาย";
+            } else if (finalResult === 32) {
+                finaltext2 = "Charming/ Popular / มีเสน่ห์ / เป็นที่นิยม";
+            } else if (finalResult === 36) {
+                finaltext2 = "Harmony/ Love / ความสามัคคี / ความรัก";
+            } else if (finalResult === 40) {
+                finaltext2 = "Traveling/ Adventure / การเดินทาง / ผจญภัย";
+            } else if (finalResult === 41) {
+                finaltext2 = "Aboard / ต่างประเทศ";
+            } else if (finalResult === 42) {
+                finaltext2 = "Supported / ช่วยเหลือ";
+            } else if (finalResult === 44) {
+                finaltext2 = "Speaker/ Influencer / เป็นผู้พูด / ผู้มีอิทธิพล";
+            } else if (finalResult === 45) {
+                finaltext2 = "Luck / Prosperity / โชคลาภ / ความเจริญรุ่งเรือง";
+            } else if (finalResult === 51) {
+                finaltext2 = "Supported/ Popular / ช่วยเหลือ / เป็นที่นิยม";
+            } else if (finalResult === 54) {
+                finaltext2 = "Outstanding Star / ดาวเด่น";
+            } else if (finalResult === 55) {
+                finaltext2 = "Growth / Abundance / การเติบโต / ความอุดมสมบูรณ์";
+            } else if (finalResult === 59) {
+                finaltext2 = "Great Life / ชีวิตที่ยิ่งใหญ่";
+            } else if (finalResult === 63) {
+                finaltext2 = "Love/ Partner / ความรัก / คู่หู";
+            } else if (finalResult === 65) {
+                finaltext2 = "Billionaire / CEO / มหาเศรษฐี";
+            } else if (finalResult === 90) {
+                finaltext2 = "Divine Protection / การปกป้องจากสวรรค์";
+            } else if (finalResult === 91) {
+                finaltext2 = "Happiness / Community / ความสุข / ชุมชน";
+            } else if (finalResult === 95) {
+                finaltext2 = "Great Life / ชีวิตที่ยิ่งใหญ่";
+            } else if (finalResult === 100) {
+                finaltext2 = "The Best / ดีที่สุด";
+            } else {
+                finaltext2 = "ยังไม่ตรงกับข้อไหน";
+            }
+
+
+            document.getElementById("result").innerHTML = "การคำนวนคำ <strong>" + word + "</strong> ได้ผลดังนี้ " + "<br>" + "<strong>" + result + "</strong> " + finaltext + "<br>" + "<strong>" + finalResult + "</strong> " + finaltext2;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice</title>
+    <link href='https://fonts.googleapis.com/css?family=IBM Plex Sans Thai' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=IBM%20Plex%20Sans%20Thai:600' rel='stylesheet'>
+    <style>
+        * {
+            font-family: 'IBM Plex Sans Thai', Arial, Helvetica, sans-serif;
+            font-weight: 600;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .list {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            /* grid-template-rows: repeat(5, 1fr); */
+            grid-column-gap: 30px;
+            grid-row-gap: 30px;
+        }
+
+        a {
+            background: #ccc;
+            display: block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-transform: capitalize;
+            font-size: 1.3em;
+        }
+
+        a>span {
+            display: block;
+            font-size: 0.8em;
+            color: #777;
+            font-weight: 400;
+        }
+
+        a:hover {
+            background: #aaa;
+        }
+
+        .green {
+            background: #7ad851;
+        }
+
+        .green:hover {
+            background: #68ba44;
+        }
+
+        /* ----------- iPhone X ----------- */
+
+        /* Portrait and Landscape */
+        @media only screen and (min-device-width: 320px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {
+            .list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            a {
+                font-size: 1em;
+            }
+        }
+
+        /* ----------- iPad Pro 10.5" ----------- */
+
+        /* Portrait and Landscape */
+        @media only screen and (min-device-width: 834px) and (max-device-width: 1112px) and (-webkit-min-device-pixel-ratio: 2) {
+            .list {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* ----------- Non-Retina Screens ----------- */
+        @media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
+            .list {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        /* ----------- Retina Screens ----------- */
+        @media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+            .list {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="list">
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/actor-and-actress-creator">actor-and-actress-creator
+            <span>ดารา</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/art-and-design-creator">art-and-design-creator
+            <span>ศิลปะ ออกแบบ ศิลปิน</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/automobile">automobile <span>รถยนต์
+                ยานยนต์</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/automotive-creator">automotive-creator <span>รถยนต์
+                ยานยนต์</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/banking">banking <span>ธนาคาร</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/beauty">beauty <span>ความงาม</span></a>
+        <a target="_blank"
+            href="https://trend.wisesight.com/voiceoverview/beauty-and-fashion-creator">beauty-and-fashion-creator
+            <span>ความงาม</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/beautyandpersonal">beautyandpersonal
+            <span>เครื่องสำอาง</span></a>
+        <a class="green" target="_blank" href="https://trend.wisesight.com/voiceoverview/beverage">beverage <span>เครื่องดื่ม</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/broadcasting">broadcasting <span>ทีวี
+                โทรทัศน์</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/catdog">catdog <span>หมา แมว</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/change-and-maker-creator">change-and-maker-creator
+            <span>เปลี่ยนแปลง</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/construction">construction <span>ก่อสร้าง</span></a>
+        <a class="green" class="green" target="_blank" href="https://trend.wisesight.com/voiceoverview/cooking-and-chef-creator">cooking-and-chef-creator
+            <span>ทำอาหาร ขนม เบเกอรี่</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/covid">covid <span>โควิด</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/crypto">crypto <span>คริปโต</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/delivery">delivery <span>ส่งของ</span></a>
+        <a class="green" target="_blank" href="https://trend.wisesight.com/voiceoverview/dessert">dessert <span>ของหวาน เบเกอรี่</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/devtrend">devtrend <span>โปรแกรมมิ่ง เทค</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/e-commerce">e-commerce
+            <span>ขายของออนไลน์</span></a>
+        <a class="green" class="green" target="_blank" href="https://trend.wisesight.com/voiceoverview/eat">eat <span>อาหาร ของกิน</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/edutainment">edutainment <span>การศึกษา
+                สารคดี</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/electronic-appliance">electronic-appliance
+            <span>เครื่องใช้ไฟฟ้า</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/electronic-device">electronic-device <span>มือถือ
+                gadget</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/entertainment">entertainment <span>หนัง ภาพยนต์
+                ซีรีย์ ละคร</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/ev">ev <span>อีวี</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/Family-Senior">Family-Senior <span>ผู้สูงอายุ
+                คนแก่</span></a>
+        <a target="_blank"
+            href="https://trend.wisesight.com/voiceoverview/film-and-literature-creator">film-and-literature-creator <span>หนัง
+                ภาพยนต์</span></a>
+        <a class="green" target="_blank" href="https://trend.wisesight.com/voiceoverview/food">food <span>แบรนด์อาหาร</span></a>
+        <a class="green" target="_blank" href="https://trend.wisesight.com/voiceoverview/food-and-dining-creator">food-and-dining-creator
+            <span>อาหาร ของกิน</span></a>
+        <a target="_blank"
+            href="https://trend.wisesight.com/voiceoverview/gadget-and-technology-creator">gadget-and-technology-creator
+            <span>โปรแกรมมิ่ง เทค</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/gagtrend">gagtrend GAG <span>ตลก คำคม</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/gaming">gaming เกม</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/gaming-and-esport-creator">gaming-and-esport-creator
+            <span>เกม</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/global-citizen-creator">global-citizen-creator
+            <span>มนุษย์ โลก</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/government">government <span>กรมอุตุนิยมวิทยา ตำรวจ
+                รัฐบาล ร้าบาน หน่วยงานรัฐ</span></a>
+        <a target="_blank"
+            href="https://trend.wisesight.com/voiceoverview/health-and-wellness-creator">health-and-wellness-creator
+            <span>สุขภาพ ออกกำลัง</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/home">home <span>แบรนด์ ก่อสร้าง บ้าน</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/horotrend">horotrend <span>ดวง โหรศาสตร์</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/hospital">hospital <span>โรงพยาบาล</span></a>
+        <a class="green" target="_blank" href="https://trend.wisesight.com/voiceoverview/hospitality-travel-agency">hospitality-travel-agency
+            <span>ท่องเที่ยว ที่พัก โรงแรม</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/igfashion">igfashion <span>แฟชั่น
+                การแต่งตัว</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/insurance">insurance <span>ประกันภัย
+                ประกัน</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/investment">investment <span>การลงทุน เงิน
+                หุ้น</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/investment-creator">investment-creator
+            <span>การลงทุน เงิน หุ้น</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/jewelry">jewelry <span>ทอง ห้างทอง ร้านทอง
+                เครื่องประดับ</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/kids">kids <span>เด็ก</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/knowledge-creator">knowledge-creator <span>ความรู้
+                โค้ช</span></a>
+        <a target="_blank"
+            href="https://trend.wisesight.com/voiceoverview/local-culture-creator">local-culture-creator<span>ท้องถิ่น</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/malls">malls<span>ห้าง สรรพสินค้า</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/music">music<span>เพลง</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/news">news<span>ข่าว สำนักข่าว</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/non-bank">non-bank<span>เงินกู้</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/parent-creator">parent-creator<span>แม่ ลูก เด็ก</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/pets-creator">pets-creator<span>หมา แมว สัตว์</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/poplover">poplover<span>บันเทิง ดารา</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/promotion">promotion<span>ส่วนลด โปรโมชั่น</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/real-estate">real-estate<span>บ้าน คอนโด อสังหาริมทรัพย์</span></a>
+        <a class="green" target="_blank" href="https://trend.wisesight.com/voiceoverview/restaurant">restaurant<span>ร้านอาหาร ร้านกาแฟ</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/retail">retail<span>ห้าง แมคโคร โลตัส บิ๊กซี</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/sport-creator">sport-creator<span>กีฬา ฟุตบอล</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/sports">sports<span>กีฬา ฟุตบอล</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/telco">telco<span>AIS DTAC TRUE</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/transportation">transportation<span>สายการบิน การเดินทาง</span></a>
+        <a class="green" target="_blank" href="https://trend.wisesight.com/voiceoverview/travel">travel<span>ท่องเที่ยว อาหาร ที่พัก</span></a>
+        <a class="green" target="_blank" href="https://trend.wisesight.com/voiceoverview/travel-creator">travel-creator<span>ท่องเที่ยว อาหาร ที่พัก</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/trend">trend<span>เทรนด์</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/variety-creator">variety-creator<span>ตลก บันเทิง ฮา</span></a>
+        <a target="_blank" href="https://trend.wisesight.com/voiceoverview/vtuber-creator">vtuber-creator<span> Virtual Youtuber ครีเอเตอร์ </span></a>
+    </div>
+</body>
+
+</html>

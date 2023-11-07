@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem Ipsum</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <style>
+        @import 'https://fonts.googleapis.com/css?family=Prompt';
+
+        body {
+            font-family: "Prompt", sans-serif;
+            background: #000;
+            color: #fff;
+        }
+
+        a {
+            color: #523A49;
+        }
+
+        h1 {
+            font-size: 30px;
+            text-align: center;
+            color: #523A49;
+            text-shadow: 2px 2px 0 #ACA5AA;
+            margin-bottom: 30px;
+        }
+
+        .button-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #generateHead,
+        #generatePara {
+            display: block;
+            padding: 20px 30px;
+            border: 1px solid #fff;
+            background: transparent;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 2px;
+            margin: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 0 #fff;
+            outline: 0;
+            color: #fff;
+        }
+
+        #generateHead:hover,
+        #generatePara:hover {
+            background: #523A49;
+            color: #fff;
+            box-shadow: 6px 6px 0 #ACA5AA;
+        }
+
+        #textgen {
+            display: block;
+            width: 80%;
+            margin: 20px auto;
+            height: 300px;
+            font-size: 18px;
+            font-family: "Prompt", sans-serif;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+        }
+    </style>
+    <script>
+    
+
+        $(document).ready(function () {
+            $('#generateHead').on('click', function () {
+                // Generate lorem
+                let lorem = generateLorem(8, 10);
+                // Show in textbox
+                $('#textgen').val(lorem);
+            });
+
+            $('#generatePara').on('click', function () {
+                let lorem = generateLorem(100, 200);
+                $('#textgen').val(lorem);
+            });
+        });
+
+        function getRandomIntInclusive(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function generateLorem(min_length = 5, max_length = 20) {
+            let wordlist = ['การค้า', 'การลงทุน', 'กำไร', 'การบริหาร', 'การจัดการ', 'การตลาด', 'การเงิน', 'การบัญชี', 'การจัดหาแหล่งทุน', 'การวิเคราะห์ธุรกิจ','การเดินทาง', 'การท่องเที่ยว', 'การเข้าพัก', 'ภาคี', 'สถานที่ท่องเที่ยว', 'ที่พัก', 'การเดินทาง', 'การนัดหมาย', 'การจอง', 'การจัดการทริป','เริ่มต้น', 'การสร้างธุรกิจ', 'การเริ่มต้น', 'การเติบโต', 'การพัฒนา', 'การสร้างแบรนด์', 'การตลาด', 'การวางแผน', 'การบริหาร', 'การประกอบธุรกิจ','เทคโนโลยี', 'คอมพิวเตอร์', 'โปรแกรม', 'ไอที', 'เน็ตเวิร์ค', 'สารสนเทศ', 'โซเชียล', 'มือถือ', 'แอป', 'โค้ด', 'คอมเม้นต์', 'อัลกอริทึม', 'ความปลอดภัย', 'วิศวกรรม', 'เครื่องมือ', 'การจัดการ', 'ความรู้', 'นวัตกรรม', 'ปัญญาประดิษฐ์','อาหาร', 'กาแฟ', 'เครื่องดื่ม', 'ของหวาน', 'ปรุงรส', 'เนื้อ', 'ไก่', 'เนื้อหมู', 'ปลา', 'ผัก', 'ผลไม้', 'เครื่องใช้ในครัว', 'อาหารคาว', 'อาหารหวาน', 'อาหารปิ้งย่าง', 'อาหารทะเล', 'อาหารอิตาเลีย', 'อาหารไทย', 'อาหารจีน','เชียงใหม่', 'อาหาร', 'วัฒนธรรม', 'วัด', 'เดินชม', 'ป่า', 'อุทยาน', 'ประวัติศาสตร์', 'ศิลปะ', 'การเดินทาง', 'บันเทิง', 'ออกแบบ', 'ช้อปปิ้ง', 'ตลาด', 'ความงาม', 'การเรียนรู้', 'กิจกรรม', 'นักท่องเที่ยว', 'ชีวิตชุมชน', 'ท่องเที่ยว'];
+
+            let paragraph = '',
+                sentence_count = 0,
+                sentence_max = 5,
+                sentence_wordcount = 0,
+                sentence_long = 5,
+                sentence_chanceofcut = 50,
+                sentence_maxword = 8,
+                sentence_wordindexes = [];
+
+            let rand_length = getRandomIntInclusive(min_length, max_length);
+            for (let i = 0; i < rand_length; i++) {
+                let thisword = Math.floor(Math.random() * wordlist.length);
+                if (sentence_wordindexes.indexOf(thisword) != -1) {
+                    i--;
+                    continue;
+                }
+                sentence_wordcount++;
+                if (sentence_wordcount > sentence_long) {
+                    if (sentence_wordcount > sentence_maxword) {
+                        // Cut in the instant
+                        paragraph += ' ';
+                        sentence_wordcount = 0;
+                        sentence_wordindexes = [];
+                        // Check for new paragraph
+                        sentence_count++;
+                        if (sentence_count > sentence_max) {
+                            paragraph += "\n\n";
+                            sentence_count = 0;
+                        }
+                    } else {
+                        // Random to cut
+                        if (Math.random() * 100 > sentence_chanceofcut) {
+                            // Cut it
+                            paragraph += ' ';
+                            sentence_wordcount = 0;
+                            sentence_wordindexes = [];
+                            // Check for new paragraph
+                            sentence_count++;
+                            if (sentence_count > sentence_max) {
+                                paragraph += "\n\n";
+                                sentence_count = 0;
+                            }
+                        }
+                    }
+                }
+                paragraph += wordlist[thisword];
+                sentence_wordindexes.push(thisword);
+            }
+
+            return paragraph;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>โลเร็มอิพซัม ภาษาไทย [Startup Edition V1]</h1>
+    <div class="button-wrapper">
+        <button id="generateHead">Generate Heading</button>
+        <button id="generatePara">Generate Paragraph</button>
+    </div>
+
+    <textarea name="" id="textgen" cols="30" rows="10"></textarea>
+
+    <div class="footer">
+        <p>ส่งลิสต์คำเพิ่มเติม ติชม แนะนำ ได้ที่ admin@designil.com นะฮะ</p>
+        <p>Coded by <a href="http://www.designil.com">Perth</a>. Idea by <a
+                href="https://www.facebook.com/photo.php?fbid=10153744586772006&set=a.375879542005.155784.712242005&type=3">Chakkrisn,
+                Montri, Jenny, Tree</a></p>
+    </div>
+    <script>
+          var textarea = document.getElementById("textgen");
+
+textarea.addEventListener("click", function() {
+    textarea.select();
+    document.execCommand("copy");
+});
+    </script>
+</body>
+
+</html>

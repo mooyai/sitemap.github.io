@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Color Ratio Analyzer</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="parent">
+        <div class="child-1">
+            <h1>Image Color Ratio Analyzer</h1>
+
+            <input type="file" name="upload" id="imageUploader" accept="image/*" name="imageUploader" />
+
+
+
+            <canvas id="colorCanvas" width="800" height="600" style="border:1px solid #ccc;"></canvas>
+        </div>
+
+        <div>
+            <div id="colorResults"></div>
+        </div>
+
+    </div>
+
+    <script src="script-rgb.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    text-align: center;
+    padding: 0px;
+    margin: 0;
+}
+
+#colorCanvas {
+    margin-top: 20px;
+    width: 80%;
+    height: auto;
+}
+
+#colorResults div {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+#colorResults {
+    height: 100vh;
+    height: 100dvh;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.child-1 {
+    padding: 20px;
+}
+
+/*/////////////////// iPHONE ///////////////////*/
+
+/* iPhone in Portrait */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (orientation: portrait) {
+    /* Styles for iPhone in Portrait */
+    .parent {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* iPhone in Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (orientation: landscape) {
+    /* Styles for iPhone in Landscape */
+    .parent {
+        grid-template-columns: 1fr;
+    }
+}
+
+/*/////////////////// iPAD ///////////////////*/
+
+/* iPad in Portrait */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) {
+    /* Styles for iPad in Portrait */
+}
+
+/* iPad in Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) {
+    /* Styles for iPad in Landscape */
+}
+
+/*/////////////////// Desktop ///////////////////*/
+
+/* Desktop */
+@media only screen 
+  and (min-width: 1025px) 
+  and (max-width: 1919px) {
+    /* Styles for Desktop */
+}
+
+/*/////////////////// Very Large Screens ///////////////////*/
+
+/* Very Large Screens */
+@media only screen 
+  and (min-width: 1920px) {
+    /* Styles for Very Large Screens */
+}
+

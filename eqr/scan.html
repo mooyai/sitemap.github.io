@@ -1,0 +1,77 @@
+<html>
+
+<head>
+    <title>Charger ID Scanner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <center>
+        <button onClick="window.close()">Close</button>
+    </center>
+    <div id="qr-reader" style="width:device-width"></div>
+    <center>
+        <br>
+        <div id="qr-reader-results"></div>
+    </center>
+</body>
+<script src="html5-qrcode.min.js"></script>
+<script>
+    function docReady(fn) {
+        // see if DOM is already available
+        if (document.readyState === "complete"
+            || document.readyState === "interactive") {
+            // call on next available tick
+            setTimeout(fn, 1);
+        } else {
+            document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+
+    function useCode(id,socket) {
+        opener.setCode(id,socket)
+        window.close()
+    }
+
+    docReady(function () {
+        var resultContainer = document.getElementById('qr-reader-results');
+        var lastResult, countResults = 0;
+        function onScanSuccess(decodedText, decodedResult) {
+            if (decodedText !== lastResult) {
+                ++countResults;
+                lastResult = decodedText;
+                // Handle on success condition with the decoded message.
+                console.log(`Scan result ${decodedText}`, decodedResult);
+                try {
+                    let code = atob(decodedResult.decodedText)
+                    if ((code.length == 13 || code.length == 12) && code.startsWith('GWC-OR-')) {
+                        if (code.length==12) {
+                            let id = '0'+code.substr(7, 3)
+                            let socket = code.substr(11, 1)
+
+                            let fixed=`GWC-OR-${id},${socket}`
+
+                            document.getElementById("qr-reader-results").innerHTML = `<button onClick="useCode('${id}','${socket}')">${code}<br>(Should be ${fixed})<br>Charger ID=${id} Socket=${socket}</button>`
+                        } else {
+                            let id = code.substr(7, 4)
+                            let socket = code.substr(12, 1)
+
+                            document.getElementById("qr-reader-results").innerHTML = `<button onClick="useCode('${id}','${socket}')">${code}<br>Charger ID=${id} Socket=${socket}</button>`
+                        }
+
+                    } else {
+                        document.getElementById("qr-reader-results").innerHTML = `Invalid code.`
+                    }
+                } catch (e) {
+                    document.getElementById("qr-reader-results").innerHTML = 'Invalid base64 code.'
+                }
+            }
+        }
+
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "qr-reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess);
+    });
+</script>
+</head>
+
+</html>

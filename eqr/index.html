@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html manifest="eqr.appcache">
+<head>
+<title>Emergency QR Code Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body bgcolor="#ffffff">
+	<style>
+		.numpad {
+			width: 100%;
+			height: 75px;
+		}
+	</style>
+
+	<center>
+		<div id="info">Input Socket No. and Charger ID.</div>
+		<div id="output"></div>
+
+		<fieldset>
+			<legend>Socket No.</legend>
+			<div>
+				<input type="radio" name="socket" id="socket1" value="1"><label for="socket1">No. 1</label>
+				<input type="radio" name="socket" id="socket2" value="2"><label for="socket2">No. 2</label>
+				<input type="radio" name="socket" id="socket3" value="3" checked><label for="socket3">No. 3</label>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend>Charger ID. (4 digits)</legend>
+			<div>
+				<font size="+4">
+					<div id="charger_id">_</div>
+				</font>
+				<table border="0" cellpadding="0" cellspacing="0" width="99%">
+					<tr><td width="33%"><button class="numpad">1</button class="numpad"></td><td width="33%"><button class="numpad">2</button class="numpad"></td><td width="33%"><button class="numpad">3</button class="numpad"></td></tr>
+					<tr><td><button class="numpad">4</button class="numpad"></td><td><button class="numpad">5</button class="numpad"></td><td><button class="numpad">6</button class="numpad"></td></tr>
+					<tr><td><button class="numpad">7</button class="numpad"></td><td><button class="numpad">8</button class="numpad"></td><td><button class="numpad">9</button class="numpad"></td></tr>
+					<tr><td><button class="numpad">CLEAR</button></td><td><button class="numpad">0</button class="numpad"></td><td><button class="numpad">DEL</button></td></tr>
+				</table>
+			</div>
+		</fieldset>
+
+		<center>
+			<br>
+			<button onClick="window.open('scan.html')">SCAN</button>
+		</center>
+	</center>
+
+	<script src="jquery-3.6.3.min.js"></script>
+	<script type="text/javascript" src="jquery.qrcode.js"></script>
+	<script type="text/javascript" src="qrcode.js"></script>
+	<script>
+		var charger_id=''
+		var socket='3' // usually DC CCS COMBO 2
+
+		function updateChargerId() {
+			$('#charger_id').text(charger_id+(charger_id.length==4?'':'_'))
+		}
+
+		function genQR() {
+			if (charger_id.length==4) {
+				let code='GWC-OR-'+charger_id+','+$('input[name="socket"]:checked').val()
+				$('#info').text(code)
+				$('#output').html('')
+				$('#output').qrcode(btoa(code))
+			}
+		}
+
+		function setCode(_id,_socket) {
+			charger_id=_id
+			socket=_socket
+
+			$(`input[name="socket"]`).val([socket])
+
+			updateChargerId()
+			genQR()
+		}
+
+		$('input[type=radio][name=socket]').change(function() {
+			socket=this.value
+			genQR()
+		})
+
+		$(".numpad").click(function() {
+			let key=$(this).text()
+			switch (key) {
+				case 'CLEAR': charger_id=''; updateChargerId(); break
+				case 'DEL': charger_id=charger_id.slice(0,-1); updateChargerId(); break
+				default: 
+					if (charger_id.length<4) {
+						charger_id+=key
+						updateChargerId()
+						genQR()
+					}
+			}
+		})
+
+	</script>
+
+</body>
+</html>

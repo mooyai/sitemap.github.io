@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- App style -->
+    <style>
+      .clearfix {
+        clear: both;
+      }
+      label {
+        float: left;
+        width: 10%;
+        line-height: 1.5;
+      }
+      .rate-value, .pitch-value {
+        float: right;
+        width: 5%;
+        line-height: 1.5;
+      }
+      #rate, #pitch {
+        float: right;
+        width: 81%;
+      }
+    </style>
+
+    <title>Text to speech Demo</title>
+  </head>
+  <body>
+    <div class='container'>
+
+      <h1>Text to speech Demo</h1>
+      <textarea id="msg" class="form-control" rows='3'>สวัสดีครับ คุณลูกค้ารับอะไรดีครับ ?</textarea>
+      <br>
+      <div>
+        <label for="rate">Rate</label><input type="range" min="0.5" max="2" value="1" step="0.1" id="rate">
+        <div class="rate-value">1</div>
+        <div class="clearfix"></div>
+      </div>
+      <div>
+        <label for="pitch">Pitch</label><input type="range" min="0" max="2" value="1" step="0.1" id="pitch">
+        <div class="pitch-value">1</div>
+        <div class="clearfix"></div>
+      </div>
+      <button type="button" id='btn-speak' class="btn btn-primary btn-lg my-3">Speak</button>
+      <select id='cmb-lang' class="custom-select" style='width: 120px;'>
+        <option value='th-TH'>Thai</option>
+        <option value='en-US'>English</option>
+      </select>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+
+      var synth = window.speechSynthesis;
+      var pitch = document.querySelector('#pitch');
+      var pitchValue = document.querySelector('.pitch-value');
+      var rate = document.querySelector('#rate');
+      var rateValue = document.querySelector('.rate-value');
+
+      // handle pitch/rate
+      pitch.onchange = function() {
+        pitchValue.textContent = pitch.value;
+      }
+      rate.onchange = function() {
+        rateValue.textContent = rate.value;
+      }
+
+      // lang
+      $('#cmb-lang').change((evt) => {
+        let lang = $(evt.target).val();
+        let msg = '';
+        if(lang == 'th-TH'){
+          msg = 'สวัสดีครับ คุณลูกค้ารับอะไรดีครับ ?';
+        }
+        else if(lang == 'en-US'){
+          msg = 'Hello, Welcome to coffee shop, Can I help you ?';
+        }
+        $('#msg').val(msg);
+      });
+
+      // speak
+      $('#btn-speak').click((evt) => {
+        let thiz = evt.target;
+
+        $(thiz).attr('disabled', true);
+        $(thiz).removeClass('btn-primary');
+        $(thiz).addClass('btn-danger');
+
+        var utterThis = new SpeechSynthesisUtterance($('#msg').val());
+        utterThis.lang = $('#cmb-lang').val();
+        utterThis.pitch = pitch.value;
+        utterThis.rate = rate.value;
+        synth.speak(utterThis);
+
+        utterThis.onend = function(evt){
+          $(thiz).attr('disabled', false);
+          $(thiz).removeClass('btn-danger');
+          $(thiz).addClass('btn-primary');
+        }
+      });
+
+    </script>
+
+  </body>
+</html>

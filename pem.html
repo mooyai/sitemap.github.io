@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create PEM File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create .pem File</h1>
+    <p>Enter your Origin Certificate and Private Key below:</p>
+    <form id="pemForm">
+        <label for="certificate">Origin Certificate:</label>
+        <textarea id="certificate" placeholder="Paste your Origin Certificate here..."></textarea>
+        <label for="privateKey">Private Key:</label>
+        <textarea id="privateKey" placeholder="Paste your Private Key here..."></textarea>
+        <button type="button" onclick="createPemFile()">Create PEM File</button>
+    </form>
+
+    <script>
+        function createPemFile() {
+            // Get the input values
+            const certificate = document.getElementById('certificate').value.trim();
+            const privateKey = document.getElementById('privateKey').value.trim();
+
+            // Check if inputs are not empty
+            if (!certificate || !privateKey) {
+                alert('Please provide both the Origin Certificate and Private Key.');
+                return;
+            }
+
+            // Combine the certificate and key
+            const pemContent = `${certificate}\n${privateKey}`;
+
+            // Generate a timestamp
+            const timestamp = new Date().toISOString().replace(/[:-]/g, '').replace('T', '_').split('.')[0];
+
+            // Create a Blob with the PEM content
+            const blob = new Blob([pemContent], { type: 'text/plain' });
+
+            // Create a download link
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+
+            // Use timestamp in the filename
+            link.download = `pem-${timestamp}.pem`;
+
+            // Append the link to the body
+            document.body.appendChild(link);
+            link.click();
+
+            // Cleanup: Remove the link after download
+            setTimeout(() => {
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+            }, 100);
+        }
+    </script>
+</body>
+</html>
